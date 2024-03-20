@@ -9,7 +9,7 @@ VLPRICE - (VLPRICE * 20/100) AS DISCOUNT_20,
 CASE WHEN VLPRICE - (VLPRICE * 10/100) > 15 THEN VLPRICE - (VLPRICE * 30/100) ELSE NULL END  AS DISCOUNT_30 
 FROM PRODUCT
 JOIN SUPPLIER ON SUPPLIER.CDSUPPLIER = PRODUCT.CDSUPPLIER
-ORDER BY VLPRICE 
+ORDER BY VLPRICE, NMPRODUCT
 
 -- Lista 3) - b) O nome do produto, o nome do fornecedor, o preço do produto, o preço total do produto no estoque e o preço total para o dobro do estoque para produtos com preço total acima de 12000, ordenados por fornecedor e produto.
 
@@ -21,7 +21,7 @@ VLPRICE * QTSTOCK AS VLTOTAL,
 CASE WHEN VLPRICE * QTSTOCK > 12000 THEN VLPRICE * (QTSTOCK * 2) ELSE NULL END AS DUOSTOCK 
 FROM PRODUCT
 JOIN SUPPLIER ON SUPPLIER.CDSUPPLIER = PRODUCT.CDSUPPLIER
-ORDER BY NMPRODUCT
+ORDER BY NMPRODUCT, NMSUPPLIER
 
 -- Lista 3) - c) Todas as colunas dos clientes que possuem telefone cadastrado e começam com a letra J, ordenado pelo nome do cliente.
 
@@ -39,6 +39,7 @@ GROUP BY NMPRODUCT,
 VLPRICE, 
 SUPPLIER.NMSUPPLIER
 HAVING SUPPLIER.NMSUPPLIER LIKE '%ica%'
+ORDER BY NMSUPPLIER, VLPRICE
 
 -- Lista 3) - e)  O nome do fornecedor, o fone do fornecedor, o nome do produto, o preço e o preço total do produto no estoque para produtos que comecem com a letra S, tendo preço acima de 50, ordenado por fornecedor e preço.
 
@@ -50,6 +51,7 @@ VLPRICE,
 CASE WHEN NMPRODUCT LIKE 'S%' AND VLPRICE > 50 THEN VLPRICE * QTSTOCK ELSE NULL END AS VLTOTAL
 FROM PRODUCT
 JOIN SUPPLIER ON PRODUCT.CDSUPPLIER = SUPPLIER.CDSUPPLIER
+ORDER BY NMSUPPLIER, VLPRICE
 
 -- Lista 3) - f)  O nome do cliente, o nome do produto, a data do pedido, a data de entrega, a quantidade pedida, o valor unitário de venda dos produtos e o valor total do produto pedido, cujas unidades pedidas por pedido sejam menor que 600 e a
 -- data do pedido seja no mês de agosto de 2003 e o produto comece com a letra M;
