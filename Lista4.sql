@@ -65,6 +65,11 @@ GROUP BY REQUEST.DTREQUEST, CUSTOMER.NMCUSTOMER, VLUNITARY, QTAMOUNT
 
 -- Lista 4) - f) O nome do fornecedor e quantos produtos ele fornece, para todos os fornecedores que fornecem mais que um produto;
 
+SELECT 
+SUPPLIER.NMSUPPLIER,
 
 
+
+WHERE COUNT(CDPRODUCT) > 1
+-- ALGUMA COISA ASSIM
 
