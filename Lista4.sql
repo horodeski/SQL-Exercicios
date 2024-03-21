@@ -35,7 +35,6 @@ GROUP BY SUPPLIER.NMSUPPLIER
 
 -- Lista 4 - d) O nome do cliente, seu telefone, o valor da maior compra, o valor da menor compra, o total comprado e a média de valor comprado, ordenado por maior compra decrescente.
 
-
 SELECT 
 CUSTOMER.NMCUSTOMER,
 CUSTOMER.IDFONE,
@@ -46,9 +45,8 @@ AVG(VLTOTAL) AS MEDIA
 FROM REQUEST
 JOIN CUSTOMER ON CUSTOMER.CDCUSTOMER = REQUEST.CDCUSTOMER
 GROUP BY CUSTOMER.NMCUSTOMER, CUSTOMER.IDFONE, VLTOTAL
+ORDER BY MAX(VLTOTAL) DESC
 
--- FALTA ORDERNAR
-  
 -- Lista 4) - e) A data do pedido, o nome do cliente, quantos produtos distintos ele pediu, o valor total do pedido (baseado nos valores da tabela productrequest), a média de valores do pedido (baseado nos valores da tabela productrequest)
 -- ordenado pela quantidade de produtos distintos pedidos.
 
@@ -62,7 +60,8 @@ FROM PRODUCTREQUEST
 JOIN REQUEST ON PRODUCTREQUEST.CDREQUEST = REQUEST.CDREQUEST
 JOIN CUSTOMER  ON CUSTOMER.CDCUSTOMER = REQUEST.CDCUSTOMER
 GROUP BY REQUEST.DTREQUEST, CUSTOMER.NMCUSTOMER, VLUNITARY, QTAMOUNT
-
+ORDER BY QTAMOUNT
+  
 -- Lista 4) - f) O nome do fornecedor e quantos produtos ele fornece, para todos os fornecedores que fornecem mais que um produto;
 
 SELECT 
@@ -85,7 +84,6 @@ GROUP BY PRODUCT.NMPRODUCT
 HAVING COUNT(PRODUCT.CDPRODUCT) < 2
 
 -- Lista 4) - h) O nome do cliente, o produto, o valor gasto com o produto, quantas vezes ele foi pedido pelo cliente e o nome do fornecedor. Somente para produtos em que o cliente gastou mais de R$1.000,00, ordenado por cliente e produto
-
 
 SELECT
 CUSTOMER.NMCUSTOMER,
